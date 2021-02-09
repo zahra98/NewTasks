@@ -16,8 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('Register');
 });
-Route::get('/login', function () {
-    return view('LogIn');
-});
+// Route::get('/login', function () {
+//     return view('LogIn');
+// });
 
 Route::get('/test/{post}','App\Http\Controllers\RegisterController@show');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
