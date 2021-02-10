@@ -22,6 +22,6 @@ Route::get('/', function () {
 
 Route::get('/test/{post}','App\Http\Controllers\RegisterController@show');
 
-Auth::routes();
-
+Auth::routes( ['verify'=> true]);
+Route::post('/home',[App\Http\Controllers\HomeController::class, 'updateImage'])->name('image.upload');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
