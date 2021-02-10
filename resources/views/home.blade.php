@@ -35,9 +35,7 @@
                    <h> {{ Auth::user()->address }} </h>
                    <br>
                    </div>
-                   <h> {{ __('Name : ')}}</h>
-                   <h>  {{ Auth::user()->image }} </h>
-                   <br>
+                 
 
                 </div>
             </div>
