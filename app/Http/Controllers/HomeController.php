@@ -40,4 +40,14 @@ class HomeController extends Controller
             return back()->with('success','Image Upload successfully');
         
     }
+
+    public function show()
+    {
+        //$post = User:: where ('user_id',$slug)->firstOrFail();
+        //$user =  new User();
+        return 'hello';
+         
+        
+    }
 }
+
