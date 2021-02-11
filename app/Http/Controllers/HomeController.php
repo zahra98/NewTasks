@@ -43,9 +43,8 @@ class HomeController extends Controller
 
     public function show()
     {
-        //$post = User:: where ('user_id',$slug)->firstOrFail();
-        //$user =  new User();
-        return 'hello';
+        $post =User::all();
+        return $post;
          
         
     }
