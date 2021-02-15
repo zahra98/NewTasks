@@ -10,8 +10,8 @@ class weather extends Controller
 
     public function getforcast()
 {
-    $long = $_POST["long"];
-    $lat = $_POST["lat"];
+    $long = request('long');
+    $lat = request('lat');
      function buildBaseString($baseURI, $method, $params) {
        $r = array();
        ksort($params);
@@ -59,4 +59,5 @@ class weather extends Controller
           curl_close($ch);
           
           echo $response;
-}}
+}
+}

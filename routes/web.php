@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\weather;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,5 @@ Route::get('/welcome', function () {
 Route::get('/weather', function () {
     return view('weather');
 });
+
+Route::resource('weath', weather::class);
