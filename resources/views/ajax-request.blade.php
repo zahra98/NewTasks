@@ -42,7 +42,7 @@ $(function(){
       let long = $("input[name=long]").val();
       let _token   = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
-              url: "/ajax-request",
+              url: "/weather",
               type:"POST",
               data:{
               lat:lat,

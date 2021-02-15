@@ -20,9 +20,5 @@ Route::get('/', function () {
 Route::get('/welcome', function () {
     return 'Hello World';
 });
-
-Route::get('/weather', function () {
-    return view('weather');
-});
-Route::get('ajax-request', [App\Http\Controllers\AjaxController::class, 'create']  );
-Route::post('ajax-request', [App\Http\Controllers\AjaxController::class, 'store']);
+Route::get('weather', [App\Http\Controllers\AjaxController::class, 'create']  );
+Route::post('weather', [App\Http\Controllers\AjaxController::class, 'store']);
