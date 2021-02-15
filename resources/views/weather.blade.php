@@ -21,7 +21,8 @@
                         <h id="code"></h><br>
                         </div>
                     <br>
-<br>                        <form name='form1' >
+<br>                        <form name='form1' method="post" action="" >
+                             @csrf
                             <div class="row px-3"> <label class="mb-1">
                                     <h6 class="mb-0 text-sm">longitude</h6>
                                 </label for="long" > <input class="mb-4" type="text" name="long" id = "long" placeholder="Enter your longitude">
