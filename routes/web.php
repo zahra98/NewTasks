@@ -25,4 +25,4 @@ Route::get('/weather', function () {
     return view('weather');
 });
 
-Route::resource('weath', weather::class);
+Route::resource('todo', weather::class);

@@ -1,87 +1,66 @@
-<div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
-        <div class="card card0 border-0">
-            <div class="row d-flex">
-                <div class="col-lg-6">
-                    <div class="card1 pb-5">
-                     
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card2 card border-0 px-4 py-5">
-                        <div class="row mb-4 px-3">
-                            <h6 class="mb-0 mr-4 mt-2">weather</h6>
-                        </div>
-                        <div class="card card0 border-0"  id = "forcast">
-                        <h  id="day"></h> <br>
-                        <h id="low"></h><br>
-                        <h id="high"></h><br> 
-                        <h id="text"></h><br>
-                        <h id="code"></h><br>
-                        </div>
-                    <br>
-                    
-<br>                        <form name='form1' }  >
-                             @csrf
-                            <div class="row px-3"> <label class="mb-1">
-                                    <h6 class="mb-0 text-sm">longitude</h6>
-                                </label for="long" > <input class="mb-4" type="text" name="long" id = "long" placeholder="Enter your longitude">
-                            </div>
-                            <div class="row px-3"> <label class="mb-1">
-                                    <h6 class="mb-0 text-sm">latitude</h6>
-                                </label for="lat" > <input type="text" name="lat" id = "lat" placeholder="Enter your latitude"> </div>
-                            <div class="row mb-3 px-3"> <button type="button" id = "saveusers" value = "Save"
-                                    class="btn btn-blue text-center">Get Weather</button> </div>
-                                        <h6 id = "weather"></h6>
-                        </form>
-                        <div id="result"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-blue py-4">
-            </div>
+@extends('app')
+
+@section('content')
+
+<div class="container">
+
+    <div class="d-flex bd-highlight mb-4">
+        <div class="p-2 w-100 bd-highlight">
+            <h2>Laravel AJAX Example</h2>
+        </div>
+        <div class="p-2 flex-shrink-0 bd-highlight">
+            <button class="btn btn-success" id="btn-add">
+                Add Todo
+            </button>
         </div>
     </div>
-<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script type="text/javascript">
-    $(function(){
-        $("#saveusers").on('click', function(){
-            var long  = $("#long").val();
-            var lat   = $("#lat").val();
-            $.ajax({
-              method: "POST",
-              url:    "App\Http\Controllers\weather@getforcast",
-              data: { "long": long, "lat": lat},
-             })
-             .done(
-               // show_fircast(data)
-                function( data ) {
-                    if ( ! data.success) {
-                        var myObj = JSON.parse(data);
- var day = '';
- var high = '';
- var low = '';
- var text = '';
- var code = '';
 
- day = myObj.forecasts[1].day;
- high = myObj.forecasts[1].high;
- low = myObj.forecasts[1].low;
- text = myObj.forecasts[1].text;
- code = myObj.forecasts[1].code;
-    // $("#day").show(3000).html(day).addClass('success');
-    // $("#high").show(3000).html(high).addClass('success');
- document.getElementById("day").innerHTML = 'day:' +' '+day;
- document.getElementById("high").innerHTML = 'High:' +' ' + high;
- document.getElementById("low").innerHTML = 'Low:' +' '+low;
- document.getElementById("text").innerHTML = 'Status:' +' '+text;
- document.getElementById("code").innerHTML = 'Code:' +' '+code;
-                    } else {
-                        var error = 'Somethinf went Wrong';
-                       $('day').html('<div class="alert alert-success">' + error + '</div>');
-                    }
-       
-          }
-          );
-       });
-     });
-  </script>
+    <div>
+        <table class="table table-inverse">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody id="todos-list" name="todos-list">
+              
+            </tbody>
+        </table>
+
+        <div class="modal fade" id="formModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="formModalLabel">Create Todo</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="myForm" name="myForm" class="form-horizontal" novalidate="">
+
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input type="text" class="form-control" id="title" name="title"
+                                        placeholder="Enter title" value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Description</label>
+                                    <input type="text" class="form-control" id="description" name="description"
+                                        placeholder="Enter Description" value="">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn-save" value="add">Save changes
+                        </button>
+                        <input type="hidden" id="todo_id" name="todo_id" value="0">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@endsection
