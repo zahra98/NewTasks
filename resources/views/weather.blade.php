@@ -3,9 +3,7 @@
             <div class="row d-flex">
                 <div class="col-lg-6">
                     <div class="card1 pb-5">
-                        <div class="row px-3 justify-content-center mt-4 mb-5 border-line"> <img
-                                src="https://thumbs.dreamstime.com/z/librarian-online-service-platform-knowledge-education-idea-llibrary-bookshelves-guid-isolated-vector-illustration-191844276.jpg"
-                                class="image"> </div>
+                     
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -21,7 +19,8 @@
                         <h id="code"></h><br>
                         </div>
                     <br>
-<br>                        <form name='form1' method="post" action="" >
+                    
+<br>                        <form name='form1' }  >
                              @csrf
                             <div class="row px-3"> <label class="mb-1">
                                     <h6 class="mb-0 text-sm">longitude</h6>
@@ -43,7 +42,6 @@
         </div>
     </div>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="Weather.js"></script>
   <script type="text/javascript">
     $(function(){
         $("#saveusers").on('click', function(){
@@ -51,7 +49,7 @@
             var lat   = $("#lat").val();
             $.ajax({
               method: "POST",
-              url:    "Weather.php",
+              url:    "App\Http\Controllers\weather@getforcast",
               data: { "long": long, "lat": lat},
              })
              .done(
