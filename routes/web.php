@@ -19,3 +19,7 @@ Route::get('/', function () {
 Route::get('/welcome', function () {
     return 'Hello World';
 });
+
+Route::get('/weather', function () {
+    return view('weather');
+});
