@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class weather extends Controller
+class AjaxController extends Controller
 {
-    //
-
-    public function index()
+    public function create()
     {
+
+      return view('ajax-request');
+    }
+
+    public function store(Request $request)
+    {
+
         $long = request('long');
         $lat = request('lat');
          function buildBaseString($baseURI, $method, $params) {
@@ -34,8 +39,8 @@ class weather extends Controller
               $consumer_key = 'dj0yJmk9QTFsNnZ2WmZLdE82JmQ9WVdrOVYwaEZkbll4WlRJbWNHbzlNQT09JnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PTdk';
               $consumer_secret = '6467c3a7caec44a06601bf3dd86ed924ebe8a729';
               $query = array(
-              'lat' => 35,
-              'lon' => 32,
+              'lat' => $lat,
+              'lon' =>  $long,
               'format' => 'json',
                           );
               $oauth = array(
@@ -59,6 +64,7 @@ class weather extends Controller
               curl_close($ch);
               
               echo $response;
-    }
-    }
 
+
+    }
+}

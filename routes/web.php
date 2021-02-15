@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\weather;
+use App\Http\Controllers\AjaxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +24,5 @@ Route::get('/welcome', function () {
 Route::get('/weather', function () {
     return view('weather');
 });
-
-Route::resource('todo', weather::class);
+Route::get('ajax-request', [App\Http\Controllers\AjaxController::class, 'create']  );
+Route::post('ajax-request', [App\Http\Controllers\AjaxController::class, 'store']);

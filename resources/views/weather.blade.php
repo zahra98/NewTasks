@@ -40,13 +40,13 @@
 
                             <div class="form-group">
                                 <label>Title</label>
-                                <input type="text" class="form-control" id="title" name="title"
+                                <input type="text" class="form-control" id="lat" name="lat"
                                         placeholder="Enter title" value="">
                             </div>
 
                             <div class="form-group">
                                 <label>Description</label>
-                                    <input type="text" class="form-control" id="description" name="description"
+                                    <input type="text" class="form-control" id="long" name="long"
                                         placeholder="Enter Description" value="">
                             </div>
                         </form>
