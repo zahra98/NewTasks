@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -67,15 +68,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $role= \App\Models\Role::firstOrCreate(['name'=>$data['role']]);
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'address'=> $data['address'],
-            'is_admin' => $data['role'], 
-        ]);
+        ]
+    
+    );
 
-
+       $user -> save();
+       $user->assignRole($role);
+       return  $user;
+        
+    }
+    protected function createRole(array $data)
+    {
+        
+        $role= \App\Models\Role::firstOrCreate(['name'=>$data['role']]);
+        $user = User::where('email', '=', $data['email'])->first();
+        $userid = $user->id;
+        $user->assignRole($role);
+       
         
     }
 }

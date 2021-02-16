@@ -81,8 +81,8 @@
 
                             <label for="Role" class="col-md-4 col-form-label text-md-right">{{ __('what is your role?') }}</label>
                             <div class="col-md-6">
-                           <input type="radio" id="role" name = "role" value =  "1"  > Admin </br>
-                           <input type="radio" id="role" name = "role" value = "0" > User </br>
+                           <input type="radio" id="role" name = "role" value =  "admin"  > Admin </br>
+                           <input type="radio" id="role" name = "role" value = "user" > User </br>
                            </div>
 
                         </div>     
