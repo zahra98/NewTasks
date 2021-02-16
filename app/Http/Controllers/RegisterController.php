@@ -7,10 +7,11 @@ class RegisterController {
 
 
 //$post = \DB::table('users')-> where('user_id',$slug)->first();
-$post = User:: where ('user_id',$slug)->firstOrFail();
-   return view('welcome', [
-       'post' => $post
-   ]);
+$book = Book:: where ('catagory',$slug)->firstOrFail();
+  //  return view('welcome', [
+  //      'post' => $post
+  //  ]);
+  return $book;
  }
 }
 

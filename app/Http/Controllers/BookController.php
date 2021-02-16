@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -11,6 +12,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 class BookController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth' => 'verified']);
+    }
 
     public function index()
     {
@@ -34,10 +40,20 @@ class BookController extends Controller
     }
     protected function showBook()
     {
-        $book = Book::all();
-        return view('bookList', [
+       // $book = Book::all();
+        $book = DB::table('books')
+                ->select('catagory')
+                ->groupBy('catagory')
+               // ->having('catagory', '=', 'ios')
+                ->get();
+        return view('showBooks', [
             'books' => $book
         ]);
+        // foreach($book as $bo) {
+        //     dd($bo->catagory);
+        // }
+       // dd(count($book)) ;
+       // dd($book[0]->catagory);
     }
 
 }

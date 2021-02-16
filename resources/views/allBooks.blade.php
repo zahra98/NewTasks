@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     
-                  <h> Choose a catagory:</h>
+                  <h> Books realated to : {{$books[0]->catagory}}</h>
                   <br>
                   <br>
                  
@@ -17,10 +17,9 @@
                     <?php
                   //  echo count($books);
                     for ($x = 0; $x < count($books); $x++) {
-                        $cat = $books[$x]->catagory;
-                        echo "<a href='/catagory/?cat=$cat' > ";
-                        echo $books[$x]->catagory;
-                        echo "</a>";
+                        echo "<h> ";
+                        echo $books[$x]->title;
+                        echo "</h>";
                       echo "<br>";
                       echo "<br>";
                       } 
