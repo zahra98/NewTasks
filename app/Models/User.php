@@ -23,6 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'address',
         'phone',
+        'is_admin',
     ];
 
     /**
@@ -47,7 +48,36 @@ class User extends Authenticatable implements MustVerifyEmail
     public function books(){
         return $this-> hasMany(Book::class);
     }
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class)->withTimestamps();
+    }
 
+    /**
+     * Assign a new role to the user.
+     *
+     * @param  mixed  $role
+     */
+    public function assignRole($role)
+    {
+        if (is_string($role)) {
+            $role = Role::whereName($role)->firstOrFail();
+        }
+
+        $this->roles()->sync($role, false);
+    }
+
+    /**
+     * Fetch the user's abilities.
+     *
+     * @return array
+     */
+    public function abilities()
+    {
+        return $this->roles
+            ->map->abilities
+            ->flatten()->pluck('name')->unique();
+    }
     
 }
 

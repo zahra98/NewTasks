@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('image')-> default('images/avatar.png');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('is_ddmin')-> default(false);
+            $table->char('is_admin', 1)->default('0');
             $table->rememberToken();
             $table->timestamps();
 
