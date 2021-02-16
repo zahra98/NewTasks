@@ -15,11 +15,13 @@ class book extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'title',
         'auther',
         'catagory',
         'copies',
         'ispn',
+        
     ];
 
 public function auther(){

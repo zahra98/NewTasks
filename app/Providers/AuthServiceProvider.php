@@ -24,7 +24,13 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        Gate::before(function ($user, $ability) {
+            if ($user->abilities()->contains($ability)) {
+                return true;   
+            }
+        });
         Passport::routes();
+ 
         // $startTime = date('Y-m-d H:i:s');
         // $endTime = date('Y-m-d H:i:s',strtotime('+7 day +1 hour +30 minutes +45 seconds',strtotime($startTime)));
         // $expTime = DateTime::createFromFormat('Y-m-d H:i:s',$endTime);

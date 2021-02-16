@@ -23,5 +23,9 @@ Route::get('/', function () {
 Route::get('/test/{post}','App\Http\Controllers\RegisterController@show');
 
 Auth::routes( ['verify'=> true]);
+Route::get('/addBook', [App\Http\Controllers\BookController::class, 'index'])->name('page');
+Route::post('/addBook',[App\Http\Controllers\BookController::class, 'addBook'])->name('addBook');
 Route::post('/home',[App\Http\Controllers\HomeController::class, 'updateImage'])->name('image.upload');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Route::get('/addBook', [App\Http\Controllers\BookController::class, 'index'])->name('home');

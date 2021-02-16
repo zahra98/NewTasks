@@ -75,22 +75,10 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'address'=> $data['address'],
         ]
-    
     );
-
        $user -> save();
        $user->assignRole($role);
        return  $user;
-        
-    }
-    protected function createRole(array $data)
-    {
-        
-        $role= \App\Models\Role::firstOrCreate(['name'=>$data['role']]);
-        $user = User::where('email', '=', $data['email'])->first();
-        $userid = $user->id;
-        $user->assignRole($role);
-       
         
     }
 }
