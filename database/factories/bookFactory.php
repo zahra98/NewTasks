@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\book;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 use Illuminate\Support\Str;
 class bookFactory extends Factory
 {
@@ -23,8 +24,9 @@ class bookFactory extends Factory
     {
         return [
             //
-            'user_id' => factory(App\User::class),
-            'title' => $this->faker->title,
+            //
+            'user_id' => \App\Models\User::factory()->create(),
+            'title' => $this->faker->sentence,
             'auther' => $this->faker->name,
             'catagory' => $this->faker->sentence,
             'copies' => 10,
