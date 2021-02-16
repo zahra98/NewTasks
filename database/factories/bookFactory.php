@@ -31,9 +31,7 @@ class bookFactory extends Factory
             'catagory' => $this->faker->sentence,
             'copies' => 10,
             'ispn' => Str::random(15),
-            // $table->string('catagory')->nullable();
-            // $table->string('ispn', 15)->unique();
-            // $table->integer('copies');
+
 
         ];
     }

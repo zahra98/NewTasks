@@ -22,6 +22,9 @@ class book extends Model
         'ispn',
     ];
 
+public function auther(){
+    return $this->belongsTo(User::class);
+}
 public function user(){
     return $this->belongsTo(User::class);
 }
