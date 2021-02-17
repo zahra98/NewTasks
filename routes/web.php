@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('WelcomePage');
 });
 Auth::routes( ['verify'=> true]);
-Route::get('/addBook', [App\Http\Controllers\BookController::class, 'index'])->name('page');
+Route::get('/addBook', [App\Http\Controllers\BookController::class, 'index'])->name('page')->middleware('can:add_book,user');
 Route::post('/addBook',[App\Http\Controllers\BookController::class, 'addBook'])->name('addBook');
 Route::get('/showBooks', [App\Http\Controllers\BookController::class, 'showBook'])->name('showme');
 Route::post('/home',[App\Http\Controllers\HomeController::class, 'updateImage'])->name('image.upload');
@@ -31,6 +31,3 @@ Route::get('/catagory', function () {
         'books' => $books
     ]);
 })->middleware(['auth' => 'verified']);
-
-
-//Route::get('/addBook', [App\Http\Controllers\BookController::class, 'index'])->name('home');

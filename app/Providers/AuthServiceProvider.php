@@ -5,6 +5,8 @@ use Laravel\Passport\Passport;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use DateTime;
+use App\Models\User;
+use App\Models\Role;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -24,10 +26,18 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        Gate::before(function ($user, $ability) {
-            if ($user->abilities()->contains($ability)) {
+        // Gate::before(function ($user, $ability) {
+        //     if ($user->abilities()->contains($ability)) {
+        //         return true;   
+        //     }
+        // });
+
+        Gate::define('add_book',function(User $user){
+            $ability = 'add_book';
+            if ($user->abilities()->contains( $ability )) {
                 return true;   
             }
+
         });
         Passport::routes();
  

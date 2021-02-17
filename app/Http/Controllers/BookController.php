@@ -25,6 +25,7 @@ class BookController extends Controller
     //
     protected function addBook(Request $request)
     {
+
         $book = Book::create([
             'user_id'=>Auth::id(),
             'title' => $request->input('title'),
