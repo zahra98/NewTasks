@@ -6,9 +6,12 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\rentRequest;
+use App\Mail\rentResponse;
+use App\Mail\rentdecline;
 use Illuminate\Http\Request;
 
 class RentController extends Controller
+
 {
     public function __construct()
     {
@@ -29,10 +32,11 @@ class RentController extends Controller
         $books = Book::where('id',  $bookid )->firstOrfail();
         $owner_id = $books->user_id;
         $owner = User::where('id',  $owner_id )->firstOrfail();
-       
+        $address = $_SERVER['HTTP_HOST'];
+        $toEmail = $owner->email;
 
 
-        Mail::to(  $current_user_email )->send(new rentRequest($user,$books,$owner));
+        Mail::to(  $toEmail )->send(new rentRequest($user,$books,$owner, $address));
     //     Mail::raw('it works',function($message){
     //    $current_user_email = Auth::User()->email;
 
@@ -47,6 +51,28 @@ class RentController extends Controller
     //     });
 
        return view('/emailSent')->with('message','request sent') ;
+
+
+
+
+    }
+
+    protected function confirmRent()
+    {
+        $user_id = request('user');
+        $user = User::where('id',   $user_id )->firstOrfail();
+        $email = $user->email;
+        Mail::to( $email )->send(new rentResponse);
+        return redirect('/home');
+    }
+
+    protected function declineRent()
+    {
+        $user_id = request('user');
+        $user = User::where('id',   $user_id )->firstOrfail();
+        $email = $user->email;
+        Mail::to( $email )->send(new rentdecline);
+        return redirect('/home');
 
 
 

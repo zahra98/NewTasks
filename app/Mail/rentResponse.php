@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class rentRequest extends Mailable
+class rentResponse extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,17 +16,8 @@ class rentRequest extends Mailable
      *
      * @return void
      */
-    public $user;
-    public $book;
-    public $owner;
-    public $address;
-    public function __construct($user,$book,$owner,$address)
-
+    public function __construct()
     {
-        $this->user = $user;
-        $this->book = $book;
-        $this->owner = $owner;
-        $this->domain = $address;
         //
     }
 
@@ -37,6 +28,6 @@ class rentRequest extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.rent');
+        return $this->markdown('emails.confirm');
     }
 }

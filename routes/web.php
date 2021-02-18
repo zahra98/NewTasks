@@ -32,3 +32,6 @@ Route::get('/catagory', function () {
     ]);
 })->middleware(['auth' => 'verified']);
 Route::get('/sendEmail', [App\Http\Controllers\RentController::class, 'rent'])->middleware(['auth' => 'verified']);
+Route::get('/confirmRent', [App\Http\Controllers\RentController::class, 'confirmRent'])->middleware(['auth' => 'verified']);
+Route::get('/declineRent', [App\Http\Controllers\RentController::class, 'declineRent'])->middleware(['auth' => 'verified']);
+
