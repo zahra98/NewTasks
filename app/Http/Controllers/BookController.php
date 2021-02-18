@@ -41,20 +41,14 @@ class BookController extends Controller
     }
     protected function showBook()
     {
-       // $book = Book::all();
         $book = DB::table('books')
                 ->select('catagory')
                 ->groupBy('catagory')
-               // ->having('catagory', '=', 'ios')
                 ->get();
         return view('showBooks', [
             'books' => $book
         ]);
-        // foreach($book as $bo) {
-        //     dd($bo->catagory);
-        // }
-       // dd(count($book)) ;
-       // dd($book[0]->catagory);
+
     }
 
 }

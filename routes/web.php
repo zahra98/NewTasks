@@ -31,3 +31,4 @@ Route::get('/catagory', function () {
         'books' => $books
     ]);
 })->middleware(['auth' => 'verified']);
+Route::get('/sendEmail', [App\Http\Controllers\RentController::class, 'rent'])->middleware(['auth' => 'verified']);
