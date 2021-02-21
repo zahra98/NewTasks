@@ -32,8 +32,23 @@ class AuthServiceProvider extends ServiceProvider
         //     }
         // });
 
-        Gate::define('add_book',function(User $user){
-            $ability = 'add_book';
+        Gate::define('add_books',function(User $user){
+            $ability = 'add_books';
+            if ($user->abilities()->contains( $ability )) {
+                return true;   
+            }
+
+        });
+
+        Gate::define('show_requests',function(User $user){
+            $ability = 'show_requests';
+            if ($user->abilities()->contains( $ability )) {
+                return true;   
+            }
+
+        });
+        Gate::define('show_renters',function(User $user){
+            $ability = 'show_renters';
             if ($user->abilities()->contains( $ability )) {
                 return true;   
             }

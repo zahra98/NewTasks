@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Book;
+use App\Models\Requests;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ Route::get('/', function () {
     return view('WelcomePage');
 });
 Auth::routes( ['verify'=> true]);
-Route::get('/addBook', [App\Http\Controllers\BookController::class, 'index'])->name('page')->middleware('can:add_book,user');
+Route::get('/addBook', [App\Http\Controllers\BookController::class, 'index'])->name('page')->middleware('can:add_books,user');
 Route::post('/addBook',[App\Http\Controllers\BookController::class, 'addBook'])->name('addBook');
 Route::get('/showBooks', [App\Http\Controllers\BookController::class, 'showBook'])->name('showme');
 Route::post('/home',[App\Http\Controllers\HomeController::class, 'updateImage'])->name('image.upload');
@@ -27,8 +28,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/catagory', function () {
     $catagory = request('cat');
     $books = Book::where('catagory', $catagory)->get();
+    $requests = Requests::where('user_id', Auth::User()->id)->get();
     return view('allBooks',[
-        'books' => $books
+        'books' => $books,
+        'requests' => $requests,
+
     ]);
 })->middleware(['auth' => 'verified']);
 Route::get('/sendEmail', [App\Http\Controllers\RentController::class, 'rent'])->middleware(['auth' => 'verified']);

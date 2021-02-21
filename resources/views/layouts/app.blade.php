@@ -69,18 +69,33 @@
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                @can('add_book',Auth::user())
+                                @can('add_books',Auth::user())
                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
 
                                  <a class="dropdown-item" href="/addBook"
                                     >
-                                        {{ __('add books') }}
+                                        {{ __('Add Books') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="/addBook"
+                                    >
+                                        {{ __('Show Requests') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="/addBook"
+                                    >
+                                        {{ __('Show Renters') }}
                                     </a>
 
                                     <a class="dropdown-item" href="/showBooks"
                                     >
-                                        {{ __('show books') }}
+                                        {{ __('Show Books') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="/showBooks"
+                                    >
+                                        {{ __('Rented Books') }}
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"

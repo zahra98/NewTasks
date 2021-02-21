@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Book;
+use App\Models\Requests;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -35,11 +36,18 @@ class RentController extends Controller
         $address = $_SERVER['HTTP_HOST'];
         $toEmail = $owner->email;
 
+        $request = Requests::create([
+            'user_id'=>Auth::id(),
+            'book_id' =>  $bookid ,
+        ]
+    );
+       $request -> save();
+        
 
         Mail::to(  $toEmail )->send(new rentRequest($user,$books,$owner, $address));
        return view('/emailSent')->with('message','request sent') ;
 
-
+        
 
 
     }
