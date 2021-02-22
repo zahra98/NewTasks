@@ -10,8 +10,6 @@
                 <div class="card-header">{{ __('Book Store') }}</div>
 
                 <div class="card-body">
-                  <h> Books realated to : {{$books[0]->catagory}}</h>
-                  <h> Books realated to : {{$requests[0]->book_id}}</h>
                   <br>
                   <br>
                   @foreach ($books as $book)
@@ -32,15 +30,22 @@
                     <br>
                     <br>
 
-
-                    @if ($book->copies > 0)
+                  
+                    @if (!$requests->isEmpty())
                     <?php
-                        echo "<a class= 'btn btn-primary' href='/bookdetails/?book=$book->id' > ";
-                        echo 'View Details';
+                        echo "<h class= 'btn btn-primary'  > ";
+                        echo $requests[0]->status ;
+                        echo "</h>";
+                    ?>
+                    
+                    @else
+                    <?php
+                        echo "<a class= 'btn btn-primary' href='/sendEmail/?bookid=$book->id' > ";
+                        echo 'ask to rent';
                         echo "</a>";
                     ?>
                     @endif
-                    
+
                     <br>
                     <br>
                     <br>

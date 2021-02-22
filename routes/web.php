@@ -35,7 +35,21 @@ Route::get('/catagory', function () {
 
     ]);
 })->middleware(['auth' => 'verified']);
+
 Route::get('/sendEmail', [App\Http\Controllers\RentController::class, 'rent'])->middleware(['auth' => 'verified']);
+Route::get('/bookdetails', function () {
+    $bookId = request('book');
+    $books = Book::where('id', $bookId)->get();
+    $requests = Requests::where(
+        'user_id', '=',Auth::User()->id,'and')->where('book_id', '=',$bookId)
+    
+    ->get();
+    return view('bookDetails',[
+        'books' => $books,
+        'requests' => $requests,
+        ]);
+
+    });
 Route::get('/confirmRent', [App\Http\Controllers\RentController::class, 'confirmRent'])->middleware(['auth' => 'verified']);
 Route::get('/declineRent', [App\Http\Controllers\RentController::class, 'declineRent'])->middleware(['auth' => 'verified']);
 
