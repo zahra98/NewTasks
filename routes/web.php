@@ -58,12 +58,14 @@ Route::get('/declineRent', [App\Http\Controllers\RentController::class, 'decline
 Route::get('/showRequests', function () {
     $userId = Auth::User()->id;
     $books = Book::where('user_id', $userId)->get();
-    
-    //$requests = Requests::where('book_id', $books->id)->get();
-    // return view('showRequests',[
-    //     'books' => $books,
-    //     'requests' => $requests,
+    $requests = Requests::where('owner_id', $userId)->get();
+    return view('showRequests',[
+        'books' => $books,
+        'requests' => $requests,
 
-    // ]);
-    return $books;
+    ]);
+    //return  $requests;
 })->middleware('can:add_books,user');
+
+//ownerConfirm
+Route::get('/ownerconfirm', [App\Http\Controllers\RentController::class, 'ownerConfirm'])->name('ownerconfirm')->middleware(['auth' => 'verified']);

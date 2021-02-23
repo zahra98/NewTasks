@@ -19,6 +19,7 @@ class CreateRequestsTable extends Migration
             $table->timestamps();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('book_id')->unsigned();
+            $table->bigInteger('owner_id');
 
 
         });

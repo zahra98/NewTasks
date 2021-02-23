@@ -38,6 +38,13 @@
                         echo $requests[0]->status ;
                         echo "</h>";
                     ?>
+
+                    @elseif($book->user_id == Auth::user()->id )
+                    <?php
+                        echo "<h class= 'btn btn-primary'  > ";
+                        echo "Update";
+                        echo "</h>";
+                    ?>
                     
                     @else
                     <?php

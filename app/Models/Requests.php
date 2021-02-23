@@ -14,6 +14,8 @@ class Requests extends Model
         'user_id',
         'status',
         'book_id',
+        'owner_id',
+
 
         
     ];

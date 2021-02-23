@@ -26,6 +26,7 @@ class CreateRentedTable extends Migration
             $table->bigInteger('renter_id')->unsigned();
             $table->bigInteger('rentedBook_id')->unsigned();
             $table->bigInteger('request_id')->unsigned();
+            $table->bigInteger('owner_id');
          
         });
 
