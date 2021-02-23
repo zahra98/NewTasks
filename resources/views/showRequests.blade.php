@@ -24,7 +24,7 @@
                     <br>
                     <br>
                     @if($request->status == 'pending')
-                    <a class="btn btn-primary" href='/ownerconfirm/?request={{$request->id }}' >Confirm</a> <br>
+                    <a class="btn btn-primary" href='/ownerconfirm/?request={{$request->id }}' >Confirm</a> 
                     <a class="btn btn-primary" href='/ownerdecline/?request={{$request->id }}' >Decline</a> <br>
                     @elseif($request->status == 'confirmed')
                     <a class="btn btn-primary" >Confirmed</a> <br>

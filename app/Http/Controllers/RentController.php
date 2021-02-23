@@ -10,8 +10,8 @@ use App\Mail\rentRequest;
 use App\Mail\rentResponse;
 use App\Mail\rentdecline;
 use Illuminate\Http\Request;
-use Illuminate\Http\Rented;
-
+use App\Models\Rented;
+use Carbon\Carbon;
 class RentController extends Controller
 
 {
@@ -46,8 +46,8 @@ class RentController extends Controller
     );
        $request -> save();
 
-       // Mail::to(  $toEmail )->send(new rentRequest($user,$books,$owner, $address));
-       return view('/emailSent')->with('message','request sent') ;
+       Mail::to(  $toEmail )->send(new rentRequest($user,$books,$owner, $address));
+       return redirect('/bookdetails/?book='.$bookid) ;
     }
 
     protected function confirmRent()
@@ -57,14 +57,8 @@ class RentController extends Controller
         $bookid = request('book');
         $user = User::where('id',  $user_id )->firstOrfail();
         $email = $user->email;
-       // Mail::to( $email )->send(new rentResponse($bookid));
-       // $requests = Requests::where( 'user_id', '=',$user_id,'and')->where('book_id', '=',$bookid) ->firstOrfail();
-        // $requwstId=  $requests->id; 
-        // $request2 = Requests::find($requwstId);
-        // return  $request2;
-        // $request2->status='confirmed';
-        // $request2->save();
-         return 'OK' ;
+        Mail::to( $email )->send(new rentResponse($bookid));
+        return redirect('/home');
     }
 
     protected function ownerConfirm()
@@ -78,6 +72,21 @@ class RentController extends Controller
         $books = Book::where('id',$bookId )->firstOrfail();
         $books->copies=$books->copies - 1;
         $books->save();
+        $owner = $books->user_id;
+        $start = Carbon::now();
+        $current = Carbon::now();
+        $dueDate = $current->addDays(3);
+
+        $rent = Rented::create([
+            'renter_id'=>$requests->user_id,
+            'rentedBook_id' =>  $bookId ,
+            'startDate'=> $start  ,
+            'dueDate'=>$dueDate,
+            'request_id' => $requestId ,
+            'owner_id'=> $owner 
+        ]
+    );
+          $rent -> save();
 
 
 
@@ -100,7 +109,7 @@ class RentController extends Controller
         $user_id = request('user');
         $user = User::where('id',   $user_id )->firstOrfail();
         $email = $user->email;
-       // Mail::to( $email )->send(new rentdecline($bookid));
+        Mail::to( $email )->send(new rentdecline($bookid));
         return redirect('/home');
 
 

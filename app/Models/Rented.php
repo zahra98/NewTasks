@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Rented extends Model
 {
     use HasFactory;
+    public $table = "rented";
 
     protected $fillable = [
         'renter_id',
