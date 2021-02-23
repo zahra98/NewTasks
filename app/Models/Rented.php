@@ -16,7 +16,7 @@ class Rented extends Model
         'startDate',
         'dueDate',
         'request_id',
-        ' owner_id',
+        'owner_id',
 
         
     ];

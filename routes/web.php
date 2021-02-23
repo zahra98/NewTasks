@@ -69,3 +69,4 @@ Route::get('/showRequests', function () {
 
 //ownerConfirm
 Route::get('/ownerconfirm', [App\Http\Controllers\RentController::class, 'ownerConfirm'])->name('ownerconfirm')->middleware(['auth' => 'verified']);
+Route::get('/ownerdecline', [App\Http\Controllers\RentController::class, 'ownerDecline'])->name('ownerdecline')->middleware(['auth' => 'verified']);

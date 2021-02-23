@@ -10,6 +10,7 @@ use App\Mail\rentRequest;
 use App\Mail\rentResponse;
 use App\Mail\rentdecline;
 use Illuminate\Http\Request;
+use Illuminate\Http\Rented;
 
 class RentController extends Controller
 
@@ -73,6 +74,23 @@ class RentController extends Controller
         $requests = Requests::where('id',  $requestId  )->firstOrfail();
         $requests->status='confirmed';
         $requests->save();
+        $bookId = $requests->book_id; 
+        $books = Book::where('id',$bookId )->firstOrfail();
+        $books->copies=$books->copies - 1;
+        $books->save();
+
+
+
+        return redirect('/showRequests');
+    }
+
+    protected function ownerDecline()
+    {
+       
+        $requestId = request('request');
+        $requests = Requests::where('id',  $requestId  )->firstOrfail();
+        //$requests->status='confirmed';
+        $requests->delete();
         return redirect('/showRequests');
     }
 
