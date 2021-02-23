@@ -16,9 +16,12 @@ class rentdecline extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $book;
+    public function __construct($book)
+
     {
         //
+        $this->book = $book;
     }
 
     /**

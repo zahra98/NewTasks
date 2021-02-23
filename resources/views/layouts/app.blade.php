@@ -78,7 +78,7 @@
                                         {{ __('Add Books') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="/addBook"
+                                    <a class="dropdown-item" href="/showRequests"
                                     >
                                         {{ __('Show Requests') }}
                                     </a>

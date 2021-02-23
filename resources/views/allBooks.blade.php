@@ -11,7 +11,7 @@
 
                 <div class="card-body">
                   <h> Books realated to : {{$books[0]->catagory}}</h>
-                  <h> Books realated to : {{$requests[0]->book_id}}</h>
+                  
                   <br>
                   <br>
                   @foreach ($books as $book)

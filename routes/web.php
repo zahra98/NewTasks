@@ -25,6 +25,7 @@ Route::post('/addBook',[App\Http\Controllers\BookController::class, 'addBook'])-
 Route::get('/showBooks', [App\Http\Controllers\BookController::class, 'showBook'])->name('showme');
 Route::post('/home',[App\Http\Controllers\HomeController::class, 'updateImage'])->name('image.upload');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/catagory', function () {
     $catagory = request('cat');
     $books = Book::where('catagory', $catagory)->get();
@@ -37,6 +38,7 @@ Route::get('/catagory', function () {
 })->middleware(['auth' => 'verified']);
 
 Route::get('/sendEmail', [App\Http\Controllers\RentController::class, 'rent'])->middleware(['auth' => 'verified']);
+
 Route::get('/bookdetails', function () {
     $bookId = request('book');
     $books = Book::where('id', $bookId)->get();
@@ -50,6 +52,18 @@ Route::get('/bookdetails', function () {
         ]);
 
     });
-Route::get('/confirmRent', [App\Http\Controllers\RentController::class, 'confirmRent'])->middleware(['auth' => 'verified']);
+Route::get('/confirmRent', [App\Http\Controllers\RentController::class, 'confirmRent'])->name('confirm')->middleware(['auth' => 'verified']);
 Route::get('/declineRent', [App\Http\Controllers\RentController::class, 'declineRent'])->middleware(['auth' => 'verified']);
 
+Route::get('/showRequests', function () {
+    $userId = Auth::User()->id;
+    $books = Book::where('user_id', $userId)->get();
+    
+    //$requests = Requests::where('book_id', $books->id)->get();
+    // return view('showRequests',[
+    //     'books' => $books,
+    //     'requests' => $requests,
+
+    // ]);
+    return $books;
+})->middleware('can:add_books,user');
