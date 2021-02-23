@@ -25,6 +25,7 @@ class RentController extends Controller
     }
 
     //
+
     protected function rent()
     {
         $bookid = request('bookid');
@@ -42,31 +43,35 @@ class RentController extends Controller
         ]
     );
        $request -> save();
-        
 
         Mail::to(  $toEmail )->send(new rentRequest($user,$books,$owner, $address));
        return view('/emailSent')->with('message','request sent') ;
-
-        
-
-
     }
 
     protected function confirmRent()
     {
+       
         $user_id = request('user');
-        $user = User::where('id',   $user_id )->firstOrfail();
+        $bookid = request('book');
+        $user = User::where('id',  $user_id )->firstOrfail();
         $email = $user->email;
-        Mail::to( $email )->send(new rentResponse);
-        return redirect('/home');
+        Mail::to( $email )->send(new rentResponse($bookid));
+       // $requests = Requests::where( 'user_id', '=',$user_id,'and')->where('book_id', '=',$bookid) ->firstOrfail();
+        // $requwstId=  $requests->id; 
+        // $request2 = Requests::find($requwstId);
+        // return  $request2;
+        // $request2->status='confirmed';
+        // $request2->save();
+         return redirect('/home') ;
     }
 
     protected function declineRent()
     {
+        $bookid = request('bookid');
         $user_id = request('user');
         $user = User::where('id',   $user_id )->firstOrfail();
         $email = $user->email;
-        Mail::to( $email )->send(new rentdecline);
+        Mail::to( $email )->send(new rentdecline($bookid));
         return redirect('/home');
 
 
