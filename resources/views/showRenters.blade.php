@@ -11,24 +11,26 @@
 
                 <div class="card-body">
                   <br>
-                  @foreach ($requests as $request)
+                  @foreach ($renters as $rent)
                   <div  id="rcorners2">
-                    <h>This is request Number : {{ $request->id }}</h> 
+                    <h>This is rent Number : {{ $rent->id }}</h> 
                     <br>
                     <br>
-                    <br>
-                    <a href='/bookdetails/?book={{$request->book_id }}' >Book: {{ $request->book_id }}</a> <br>
-                    <h>Sender: {{ $request->user_id }}</h> <br>
-                    <h>Status: {{ $request->status }}</h><br>
+                
+                    <a href='/bookdetails/?book={{$rent->rentedBook_id }}' >Book: {{ $rent->rentedBook_id }}</a> <br>
+                    <h>Renter: {{ $rent->renter_id }}</h> <br>
+                
+                    <h>Start Date: {{ $rent->startDate }}</h><br>
+                    <h>Due Date: {{ $rent->dueDate }}</h><br>
                    
                     <br>
                     <br>
-                    @if($request->status == 'pending')
-                    <a class="btn btn-primary" href='/ownerconfirm/?request={{$request->id }}' >Confirm</a> 
-                    <a class="btn btn-primary" href='/ownerdecline/?request={{$request->id }}' >Decline</a> <br>
-                    @elseif($request->status == 'confirmed')
+                    @if($rent->status == 'pending')
+                    <a class="btn btn-primary" href='/returnbook/?rent={{$rent->id }}' >Returned</a> 
+                    <a class="btn btn-primary" href='/notifyrenter/?rent={{$rent->id }}' >Notify</a> <br>
+                    @elseif($rent->status == 'confirmed')
                     <a class="btn btn-primary" >Confirmed</a> <br>
-                    @elseif($request->status == 'rented')
+                    @elseif($rent->status == 'rented')
                     <a class="btn btn-primary" >Rented</a> <br>
                     @else
                     <a class="btn btn-primary" >Update</a> <br>

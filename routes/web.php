@@ -66,7 +66,11 @@ Route::get('/showRequests', function () {
     ]);
     //return  $requests;
 })->middleware('can:add_books,user');
-
+//rentedbooks
 //ownerConfirm
 Route::get('/ownerconfirm', [App\Http\Controllers\RentController::class, 'ownerConfirm'])->name('ownerconfirm')->middleware(['auth' => 'verified']);
 Route::get('/ownerdecline', [App\Http\Controllers\RentController::class, 'ownerDecline'])->name('ownerdecline')->middleware(['auth' => 'verified']);
+Route::get('/showrenters', [App\Http\Controllers\RentController::class, 'showRenters'])->name('showrenters')->middleware(['auth' => 'verified']);
+Route::get('/returnbook', [App\Http\Controllers\RentController::class, 'returnBook'])->name('returnbook')->middleware(['auth' => 'verified']);
+Route::get('/notifyrenter', [App\Http\Controllers\RentController::class, 'notifyRenter'])->name('notifyrenter')->middleware(['auth' => 'verified']);
+Route::get('/rentedbooks', [App\Http\Controllers\RentController::class, 'rentedBooks'])->name('rentedbooks')->middleware(['auth' => 'verified']);

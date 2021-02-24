@@ -83,7 +83,7 @@
                                         {{ __('Show Requests') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="/addBook"
+                                    <a class="dropdown-item" href="/showrenters"
                                     >
                                         {{ __('Show Renters') }}
                                     </a>
@@ -91,11 +91,6 @@
                                     <a class="dropdown-item" href="/showBooks"
                                     >
                                         {{ __('Show Books') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="/showBooks"
-                                    >
-                                        {{ __('Rented Books') }}
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -117,7 +112,7 @@
                                         {{ __('show books') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="/showBooks"
+                                    <a class="dropdown-item" href="/rentedbooks"
                                     >
                                         {{ __('Rented Books') }}
                                     </a>

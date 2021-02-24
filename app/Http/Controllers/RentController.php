@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\rentRequest;
 use App\Mail\rentResponse;
 use App\Mail\rentdecline;
+use App\Mail\Notify;
 use Illuminate\Http\Request;
 use App\Models\Rented;
 use Carbon\Carbon;
@@ -87,9 +88,6 @@ class RentController extends Controller
         ]
     );
           $rent -> save();
-
-
-
         return redirect('/showRequests');
     }
 
@@ -112,7 +110,61 @@ class RentController extends Controller
         Mail::to( $email )->send(new rentdecline($bookid));
         return redirect('/home');
 
+    }
 
+    protected function showRenters()
+    {
+        $user_id = Auth::id();
+        $requestId = request('request');
+        $renters = Rented::where('owner_id',  $user_id  )->get();
+        return view('showRenters',[
+            'renters' =>  $renters,
+    
+        ]);
+    }
+
+    protected function returnBook()
+    {
+        $rent_id = request('rent');
+        $rent = Rented::where('id',$rent_id )->firstOrfail();
+        $user_id = $rent->renter_id;
+        $user = User::where('id',$user_id )->firstOrfail();
+        $request = $rent->request_id;
+        $requests = Requests::where('id',  $request  )->firstOrfail();
+        $email = $user->email;
+        //Mail::to( $email )->send(new rentdecline($bookid));
+        $requests->delete();
+
+        return redirect('/showrenters');
+
+
+
+
+    }
+    protected function notifyRenter()
+    {
+        $rent_id = request('rent');
+        $rent = Rented::where('id',$rent_id )->firstOrfail();
+        $user_id = $rent->renter_id;
+        $user = User::where('id',$user_id )->firstOrfail();
+        $email = $user->email;
+        $book_id = $rent->rentedBook_id;
+        $book = Book::where('id',  $book_id  )->firstOrfail();
+        Mail::to( $email )->send(new Notify($book));
+        return redirect('/showrenters');
+
+    
+    }
+
+    protected function rentedBooks()
+    {
+        $user_id = Auth::id();
+        //$rent_id = request('rent');
+        $rent = Rented::where('renter_id',$user_id )->get();
+
+        return view('rentedBooks',[
+            'renters' =>  $rent,
+        ]);
 
 
     }
