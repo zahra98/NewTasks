@@ -26,7 +26,7 @@ class rentRequest extends Mailable
         $this->user = $user;
         $this->book = $book;
         $this->owner = $owner;
-        $this->domain = $address;
+        $this->address = $address;
         //
     }
 

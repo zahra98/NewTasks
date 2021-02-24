@@ -36,8 +36,9 @@ class RentController extends Controller
         $books = Book::where('id',  $bookid )->firstOrfail();
         $owner_id = $books->user_id;
         $owner = User::where('id',  $owner_id )->firstOrfail();
-        $address = $_SERVER['HTTP_HOST'];
-        $toEmail = $owner->email;
+        $address = request()->getHttpHost();
+
+         $toEmail = $owner->email;
 
         $request = Requests::create([
             'user_id'=>Auth::id(),
@@ -47,8 +48,9 @@ class RentController extends Controller
     );
        $request -> save();
 
-       Mail::to(  $toEmail )->send(new rentRequest($user,$books,$owner, $address));
+        Mail::to(  $toEmail )->send(new rentRequest($user,$books,$owner, $address));
        return redirect('/bookdetails/?book='.$bookid) ;
+   
     }
 
     protected function confirmRent()
