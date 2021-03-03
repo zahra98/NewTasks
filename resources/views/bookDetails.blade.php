@@ -34,18 +34,36 @@
 
                   
                     @if (!$requests->isEmpty())
+                   
                     <?php
                         echo "<h class= 'btn btn-primary'  > ";
                         echo $requests[0]->status ;
                         echo "</h>";
+                        
                     ?>
-
-                    @elseif($book->user_id == Auth::user()->id )
+                     @elseif($book->user_id == Auth::user()->id )
                     <?php
                         echo "<h class= 'btn btn-primary'  > ";
                         echo "Update";
                         echo "</h>";
                     ?>
+                    
+                    @elseif($payment->isEmpty() )
+                    <br>
+                   
+                    <?php
+                        echo "<h class= 'war'  > ";
+                        echo "You have to Create a Payment account";
+                        echo "</h>";
+                    ?>
+                     @elseif($payment[0]->balance < $book->price  )
+                     <br>
+                    <?php
+                        echo "<h class= 'war'  > ";
+                        echo "You don't have enough Money to rent this book!!";
+                        echo "</h>";
+                    ?>
+
                     
                     @else
                     <?php

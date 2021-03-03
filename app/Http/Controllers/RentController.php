@@ -12,6 +12,7 @@ use App\Mail\rentdecline;
 use App\Mail\Notify;
 use Illuminate\Http\Request;
 use App\Models\Rented;
+use App\Models\Payment;
 use Carbon\Carbon;
 class RentController extends Controller
 
@@ -90,6 +91,12 @@ class RentController extends Controller
         ]
     );
           $rent -> save();
+
+
+          $renter_id = $requests->user_id;
+          $payment = Payment::where('user_id',  $renter_id  )->firstOrfail();
+          $payment->balance = $payment->balance - $books->price;
+          $payment->save();
         return redirect('/showRequests');
     }
 

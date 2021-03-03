@@ -42,15 +42,18 @@ Route::get('/catagory', function () {
 Route::get('/sendEmail', [App\Http\Controllers\RentController::class, 'rent'])->middleware(['auth' => 'verified']);
 
 Route::get('/bookdetails', function () {
+    $userId = Auth::User()->id;
     $bookId = request('book');
     $books = Book::where('id', $bookId)->get();
     $requests = Requests::where(
         'user_id', '=',Auth::User()->id,'and')->where('book_id', '=',$bookId)
     
     ->get();
+    $payment = Payment::where('user_id', $userId)->get();
     return view('bookDetails',[
         'books' => $books,
         'requests' => $requests,
+        'payment'=>$payment,
         ]);
 
     });

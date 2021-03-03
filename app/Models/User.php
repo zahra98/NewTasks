@@ -72,7 +72,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $payment = Payment::create([
             'user_id'=>Auth::id(),
-            'balance' => 0.0,
+            'balance' => 100.0,
 
         ]
     );
