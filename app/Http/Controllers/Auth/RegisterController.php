@@ -78,6 +78,7 @@ class RegisterController extends Controller
     );
        $user -> save();
        $user->assignRole($role);
+     //  $user->paymentAccount();
        return  $user;
         
     }

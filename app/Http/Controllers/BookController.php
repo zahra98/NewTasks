@@ -33,6 +33,7 @@ class BookController extends Controller
             'catagory' => $request->input('catagory'),
             'copies'=> $request->input('copies'),
             'ispn'=> $request->input('ispn'),
+            'price'=> $request->input('price'),
         ]
     );
        $book -> save();

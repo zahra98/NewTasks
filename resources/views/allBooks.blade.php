@@ -24,9 +24,10 @@
                     @endif
                     <br>
                     <br>
-                    <br>
+                    
                     <h>Title : {{ $book->title }}</h> <br>
                     <h>Auther: {{ $book->auther }}</h> <br>
+                    <h>Price: {{ $book->price }}</h> <br>
                     <h>ISPN : {{ $book->ispn }}</h><br>
                     <h>Number of copies: {{ $book->copies }}</h> 
                     <br>

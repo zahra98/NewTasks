@@ -68,6 +68,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="price" class="col-md-4 col-form-label text-md-right">{{ __(' Price') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" required autocomplete="price">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="catagory" class="col-md-4 col-form-label text-md-right">{{ __(' Category') }}</label>
 
                             <div class="col-md-6">

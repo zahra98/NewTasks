@@ -21,6 +21,7 @@ class book extends Model
         'catagory',
         'copies',
         'ispn',
+        'price',
         
     ];
 

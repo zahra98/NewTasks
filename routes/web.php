@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Book;
+use App\Models\User;
+use App\Models\Payment;
 use App\Models\Requests;
 
 /*
@@ -74,3 +76,19 @@ Route::get('/showrenters', [App\Http\Controllers\RentController::class, 'showRen
 Route::get('/returnbook', [App\Http\Controllers\RentController::class, 'returnBook'])->name('returnbook')->middleware(['auth' => 'verified']);
 Route::get('/notifyrenter', [App\Http\Controllers\RentController::class, 'notifyRenter'])->name('notifyrenter')->middleware(['auth' => 'verified']);
 Route::get('/rentedbooks', [App\Http\Controllers\RentController::class, 'rentedBooks'])->name('rentedbooks')->middleware(['auth' => 'verified']);
+Route::get('/payment', function () {
+    $userId = Auth::User()->id;
+    $payment = Payment::where('user_id', $userId)->get();
+    return view('payment',[
+        'payment' =>  $payment,
+       
+    ]
+);
+});
+Route::get('/ActivatePayment', function () {
+    $userId = Auth::User()->id;
+    $user = User::find($userId);
+   $user->paymentAccount();
+    return redirect('payment');
+
+})->name('activate.account')->middleware(['auth' => 'verified']);
