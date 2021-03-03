@@ -177,4 +177,17 @@ class RentController extends Controller
 
 
     }
+
+    protected function filter(Request $request)
+    {
+        $user_id = Auth::id();
+        //$rent_id = request('rent');
+        $rent = Rented::where('renter_id',$user_id )->get();
+
+        return view('rentedBooks',[
+            'renters' =>  $rent,
+        ]);
+
+
+    }
 }
