@@ -95,3 +95,4 @@ Route::get('/ActivatePayment', function () {
     return redirect('payment');
 
 })->name('activate.account')->middleware(['auth' => 'verified']);
+Route::post('filter', [App\Http\Controllers\RentController::class, 'filter']);

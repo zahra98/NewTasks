@@ -178,13 +178,66 @@ class RentController extends Controller
 
     }
 
-    protected function filter(Request $request)
+    public function filter(Request $request)
     {
         $filter_book = request('filter_book');
         $filter_user = request('filter_user');
+        if ($filter_book == ''){
+        $user = User::where('name',$filter_user )->firstOrfail();
+        $id = $user->id;
+        $books = Rented::where('renter_id',$id )->get();
+      //  echo $books;
+        }
+        elseif($filter_user == ''){
+            $book = Book::where('title',$filter_book )->firstOrfail();
+            $id = $book->id;
+            $books = Rented::where('rentedBook_id',$id )->get();
+        }
+        elseif($filter_user != '' && $filter_book != ''){
+            $user = User::where('name',$filter_user )->firstOrfail();
+            $id = $user->id;
+            $book = Book::where('title',$filter_book )->firstOrfail();
+            $book_id = $book->id;
+            $userid = $user->id;
+            $books = Rented::where('rentedBook_id', '=', $book_id,'and')->where('renter_id', '=',  $userid)
+             ->get();
+        }
+         $data = array();
+         foreach($books as $row)
+         { 
+       $sub_array = array();
+       $bookname = Book::where('id',$row['rentedBook_id'] )->firstOrfail();
+       $username = User::where('id',$row['renter_id'] )->firstOrfail();
+       $sub_array[] =  $bookname->title ;
+       $sub_array[] =  $username ->name ;
+       $sub_array[] = $row['startDate'];
+       $sub_array[] = $row['dueDate'];
+       $data[] = $sub_array;
+         }
+      $output = array(
+       "draw"       =>  intval($_POST["draw"]),
+       "data"       =>  $data
+        );
         
 
-
-
+          //  echo $books;
+          $data = array();
+          foreach($books as $row)
+           { 
+           $sub_array = array();
+           $bookname = Book::where('id',$row['rentedBook_id'] )->firstOrfail();
+           $username = User::where('id',$row['renter_id'] )->firstOrfail();
+           $sub_array[] =  $bookname->title ;
+           $sub_array[] =  $username ->name ;
+           $sub_array[] = $row['startDate'];
+           $sub_array[] = $row['dueDate'];
+           $data[] = $sub_array;
+             }
+          $output = array(
+           "draw"       =>  intval($_POST["draw"]),
+           "data"       =>  $data
+            );
+       
+     echo json_encode( $output);
     }
 }

@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>  
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -16,11 +22,8 @@
     <div class="col-md-4">
      <div class="form-group">
      <label for="name" >{{ __(' Filter by Book Name') }}</label>
-      <select name="filter_book" id="filter_book" class="form-control" required>
-       <option value="">Select book</option>
-       <option value="Male">Male</option>
-       <option value="Female">Female</option>
-      </select>
+     <input type="text"  name="filter_book" id="filter_book" value="{{ old('name') }}"  autofocus>
+
      </div>
      <div class="form-group">
      <label for="name" >{{ __(' Filter by User Name') }}</label>
@@ -37,7 +40,8 @@
     <table id="customer_data" class="table table-bordered table-striped">
      <thead>
       <tr>
-       <th width="20%">Book Number</th>
+       <th width="20%">Book Tiltle</th>
+       <th width="20%">Renter Name</th>
        <th width="10%">Start Date</th>
        <th width="25%">End Date</th>
    
@@ -52,34 +56,35 @@
             </div>
         </div>
     </div>
-</div>
-@endsection
-<script type="text/javascript" language="javascript" >
+    <script type="text/javascript" language="javascript" >
  $(document).ready(function(){
   
-  fill_datatable();
   
+    
   function fill_datatable(filter_book = '', filter_user = '')
   {
+    let _token   = $('meta[name="csrf-token"]').attr('content');
    var dataTable = $('#customer_data').DataTable({
     "processing" : true,
     "serverSide" : true,
     "order" : [],
     "searching" : false,
     "ajax" : {
-     url:"fetch.php",
+     url:"/filter",
      type:"POST",
      data:{
       filter_book:filter_book, filter_user:filter_user
+      , _token: _token
+
      }
     }
    });
   }
-  
+
   $('#filter').click(function(){
    var filter_book = $('#filter_book').val();
    var filter_user = $('#filter_user').val();
-   if(filter_book != '' && filter_user != '')
+   if(filter_book != '' || filter_user != '')
    {
     $('#customer_data').DataTable().destroy();
     fill_datatable(filter_book, filter_user);
@@ -96,3 +101,6 @@
  });
  
 </script>
+</div>
+
+@endsection
