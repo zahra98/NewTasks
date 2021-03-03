@@ -180,13 +180,10 @@ class RentController extends Controller
 
     protected function filter(Request $request)
     {
-        $user_id = Auth::id();
-        //$rent_id = request('rent');
-        $rent = Rented::where('renter_id',$user_id )->get();
+        $filter_book = request('filter_book');
+        $filter_user = request('filter_user');
+        
 
-        return view('rentedBooks',[
-            'renters' =>  $rent,
-        ]);
 
 
     }
