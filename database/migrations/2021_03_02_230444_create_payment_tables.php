@@ -18,6 +18,7 @@ class CreatePaymentTables extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->double('balance');
+            $table->double('bal');
             $table->timestamps();
         });
 
