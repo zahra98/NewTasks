@@ -79,7 +79,7 @@ Route::get('/showrenters', [App\Http\Controllers\RentController::class, 'showRen
 Route::get('/returnbook', [App\Http\Controllers\RentController::class, 'returnBook'])->name('returnbook')->middleware(['auth' => 'verified']);
 Route::get('/notifyrenter', [App\Http\Controllers\RentController::class, 'notifyRenter'])->name('notifyrenter')->middleware(['auth' => 'verified']);
 Route::get('/rentedbooks', [App\Http\Controllers\RentController::class, 'rentedBooks'])->name('rentedbooks')->middleware(['auth' => 'verified']);
-Route::get('/payment', function () {
+Route::get('/mypayment', function () {
     $userId = Auth::User()->id;
     $payment = Payment::where('user_id', $userId)->get();
     return view('payment',[
@@ -91,8 +91,18 @@ Route::get('/payment', function () {
 Route::get('/ActivatePayment', function () {
     $userId = Auth::User()->id;
     $user = User::find($userId);
-   $user->paymentAccount();
-    return redirect('payment');
+     $user->paymentAccount();
+    return redirect('/home');
 
 })->name('activate.account')->middleware(['auth' => 'verified']);
+
 Route::post('filter', [App\Http\Controllers\RentController::class, 'filter']);
+
+//Route::post('/payment', ['as' => 'payment', 'uses' => 'PaymentController@payWithpaypal']);
+Route::post('/payment', [App\Http\Controllers\PaymentController::class, 'payWithpaypal'])
+->name('pay.payment');
+
+
+//Route::get('/payment/status',['as' => 'status', 'uses' => 'PaymentController@getPaymentStatus']);
+Route::get('/payment/status', [App\Http\Controllers\PaymentController::class, 'getPaymentStatus'])
+->name('status')->middleware(['auth' => 'verified']);

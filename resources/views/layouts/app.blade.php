@@ -93,7 +93,7 @@
                                         {{ __('Show Books') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="/payment"
+                                    <a class="dropdown-item" href="/mypayment"
                                     >
                                         {{ __('Payment Account') }}
                                     </a>
@@ -122,7 +122,7 @@
                                         {{ __('Rented Books') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="/payment"
+                                    <a class="dropdown-item" href="/mypayment"
                                     >
                                         {{ __('Payment Account') }}
                                     </a>

@@ -45,22 +45,20 @@
        <th width="10%">Start Date</th>
        <th width="25%">End Date</th>
    
-      </tr>
-     </thead>
+    </tr>
+    </thead>
     </table>
-    <br />
-    <br />
-    <br />
-   </div>   
-                </div>
-            </div>
-        </div>
+    <br/>
+    <br/>
+    <br/>
+    </div>   
     </div>
+    </div>
+    </div>
+    </div>
+
     <script type="text/javascript" language="javascript" >
  $(document).ready(function(){
-  
-  
-    
   function fill_datatable(filter_book = '', filter_user = '')
   {
     let _token   = $('meta[name="csrf-token"]').attr('content');
@@ -96,11 +94,9 @@
     fill_datatable();
    }
   });
-  
-  
  });
- 
 </script>
+
 </div>
 
 @endsection
