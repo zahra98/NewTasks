@@ -7,15 +7,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
+    <script src="assets/js/jquery-2.1.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/popper.js"></script>
+
+
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="assets/js/scrollreveal.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/imgfix.min.js"></script> 
+
+    <!-- Global Init -->
+    <script src="assets/js/custom.js"></script>
+  
+
 
     <title>My Library</title>
-<!--
-SOFTY PINKO
-https://templatemo.com/tm-535-softy-pinko
--->
-
-    <!-- Additional CSS Files -->
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
@@ -34,10 +51,7 @@ https://templatemo.com/tm-535-softy-pinko
             <div></div>
         </div>
     </div>  
-    <!-- ***** Preloader End ***** -->
-    
-    
-    <!-- ***** Header Area Start ***** -->
+
     <header class="header-area header-sticky">
         <div class="container">
             <div class="row">
@@ -45,28 +59,79 @@ https://templatemo.com/tm-535-softy-pinko
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
                         <a href="#" class="logo">
-                            <img src="assets/images/logo.png" alt="Softy Pinko"/>
+                            Library
+                            
                         </a>
-                        <!-- ***** Logo End ***** -->
-                        <!-- ***** Menu Start ***** -->
+
+                        @guest
                         <ul class="nav">
-                            <li><a href="#welcome" class="active">Home</a></li>
-                            <li><a href="/home">About</a></li>
-                            <li><a href="/mypayment">Work Process</a></li>
-                            <li><a href="/addBook">Testimonials</a></li>
-                            <li><a href="">Pricing Tables</a></li>
-                            <li><a href="">Blog Entries</a></li>
-                            <li><a href="">Contact Us</a></li>
-                        </ul>
-                        <a class='menu-trigger'>
-                            <span>Menu</span>
-                        </a>
-                        <!-- ***** Menu End ***** -->
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
+                            <li><a  href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                            <li> <a  href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                           </ul>
+                                                       </nav>
+                           </div>
+                         </div>
+                         </div>
+                           </header>
+                            
+                         <!-- ***** Logo End ***** -->
+                         <!-- ***** Menu Start ***** -->
+                        @else
+                           @can('add_books',Auth::user())
+                             <ul class="nav">
+                              <li><a href="/home" class="active">Home</a></li>
+                              <li><a href="/addBook">Add Books</a></li>
+                              <li><a href="/showRequests">Show Requests</a></li>
+                              <li><a href="/showrenters">Show Renters</a></li>
+                              <li><a href="/showBooks">Show Books</a></li>
+                              <li><a href="/mypayment">Payment Account</a></li>
+                              <li><a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form></li>
+                             </ul>
+                              <a class='menu-trigger'>
+                              <span>Menu</span>
+                              </a>
+                             <!-- ***** Menu End ***** -->
+                              </nav>
+                              </div>
+                              </div>
+                              </div>
+                              </header>
+                            @else   
+                              <ul class="nav">
+                              <li><a href="/home" class="active">Home</a></li>
+                              <li><a href="/showBooks">Show Books</a></li>
+                              <li><a href="/rentedbooks">Rented Books</a></li>
+                              <li><a href="/mypayment">Payment Account</a></li>
+                              <li><a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form></li>
+                              </ul>
+                              <a class='menu-trigger'>
+                              <span>Menu</span>
+                              </a>
+                             <!-- ***** Menu End ***** -->
+                              </nav>
+                              </div>
+                              </div>
+                              </div>
+                              </header>
+                              @endcan
+
+
+
+                        @endguest
     <!-- ***** Header Area End ***** -->
 
     <!-- ***** Welcome Area Start ***** -->
@@ -80,10 +145,11 @@ https://templatemo.com/tm-535-softy-pinko
     <!-- ***** Welcome Area End ***** -->
 
     <!-- ***** Features Small Start ***** -->
-    <section class="section home-feature">
+    <main>
     @yield('content')
-    </section>
- 
+</main>
+
+
     <!-- ***** Contact Us End ***** -->
     
     <!-- ***** Footer Start ***** -->
@@ -109,20 +175,9 @@ https://templatemo.com/tm-535-softy-pinko
     </footer>
     
     <!-- jQuery -->
-    <script src="assets/js/jquery-2.1.0.min.js"></script>
 
     <!-- Bootstrap -->
-    <script src="assets/js/popper.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
 
-    <!-- Plugins -->
-    <script src="assets/js/scrollreveal.min.js"></script>
-    <script src="assets/js/waypoints.min.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/imgfix.min.js"></script> 
-    
-    <!-- Global Init -->
-    <script src="assets/js/custom.js"></script>
 
   </body>
 </html>

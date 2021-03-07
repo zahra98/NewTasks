@@ -1,93 +1,89 @@
-@extends('layouts.app')
+@extends('layouts.new')
 
 @section('content')
+<section class="section colored">
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-       
-            <div class="card">
-            
-                <div class="card-header">{{ __('Book Store') }}</div>
+<div class="row">
+                <!-- ***** Pricing Item Start ***** -->
+                @foreach ($books as $book)
 
-                <div class="card-body">
-                  <h> Books realated to : {{$books[0]->catagory}}</h>
-                  <br>
-                  <br>
-                  @foreach ($books as $book)
-                  <div  id="rcorners2">
-                    <h>This is book Number : {{ $book->id }}</h> 
+                <div class="col-lg-4 col-md-6 col-sm-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
+                    <div class="pricing-item active">
                     @if ($book->copies == 0)
                     &nbsp;
                     &nbsp;
-                    <h class = "war">Not Available</h>
+                    <div class="pricing-header">
+                            <h3 class="pricing-title">Not Available</h3>
+                        </div>
                     @endif
-                    <br>
-                    <br>
-               
-                    <h>Title : {{ $book->title }}</h> <br>
-                    <h>Auther: {{ $book->auther }}</h> <br>
-                    <h>Price: {{ $book->price }}</h> <br>
-                    <h>ISPN : {{ $book->ispn }}</h><br>
-                    <h>Number of copies: {{ $book->copies }}</h> 
-                    <br>
-                    <br>
 
+                        <div class="pricing-body">
+                            <div class="price-wrapper">
+                                <span class="currency">$</span>
+                                <span class="price">{{ $book->price }}</span>
+                            </div>
+
+                            <ul class="list">
+                                <li class="active" >Title : {{ $book->title }}</li>
+                                <li class="active">Auther: {{ $book->auther }}</li>
+                                <li class="active">ISPN : {{ $book->ispn }}</li>
+                                <li class="active">Number of copies: {{ $book->copies }}</li>
+                            
+                            </ul>
+                        </div>
                   
-                    @if (!$requests->isEmpty())
+                        @if (!$requests->isEmpty())
+                        <div class="pricing-footer">
+                            <a class="main-button">{{$requests[0]->status}}</a>
+                            
+                        </div>
+
+                    @elseif($book->user_id == Auth::user()->id )
+                    <div class="pricing-footer">
+                            <a class="main-button">update</a>
+                            
+                        </div>
                    
-                    <?php
-                        echo "<h class= 'btn btn-primary'  > ";
-                        echo $requests[0]->status ;
-                        echo "</h>";
-                        
-                    ?>
-                     @elseif($book->user_id == Auth::user()->id )
-                    <?php
-                        echo "<h class= 'btn btn-primary'  > ";
-                        echo "Update";
-                        echo "</h>";
-                    ?>
-                    
-                    @elseif($payment->isEmpty() )
+                   @elseif($payment->isEmpty() )
+                   <br>
+                  
+                   <?php
+                       echo "<h class= 'war'  > ";
+                       echo "You have to Create a Payment account";
+                       echo "</h>";
+                   ?>
+                    @elseif($payment[0]->balance < $book->price  )
                     <br>
+                   <?php
+                       echo "<h class= 'war'  > ";
+                       echo "You don't have enough Money to rent this book!!";
+                       echo "</h>";
+                   ?>
+
                    
-                    <?php
-                        echo "<h class= 'war'  > ";
-                        echo "You have to Create a Payment account";
-                        echo "</h>";
-                    ?>
-                     @elseif($payment[0]->balance < $book->price  )
-                     <br>
-                    <?php
-                        echo "<h class= 'war'  > ";
-                        echo "You don't have enough Money to rent this book!!";
-                        echo "</h>";
-                    ?>
+                   @else
 
-                    
-                    @else
-                    <?php
-                        echo "<a class= 'btn btn-primary' href='/sendEmail/?bookid=$book->id' > ";
-                        echo 'ask to rent';
-                        echo "</a>";
-                    ?>
-                    @endif
+                   <div class="pricing-footer">
+                            <a href="/sendEmail/?bookid={{$book->id}}" class="main-button">Ask to rent</a>
+                            
+                        </div>
+                   @endif
 
-                    <br>
-                    <br>
-                    <br>
-                
-                    <br>
-                    </div>
-                    <br>
-                    <br>
-                 
-
-                  @endforeach
+                   <br>
+                   <br>
+                   <br>
                
+                   <br>
+                   </div>
+                   <br>
+                   <br>
+                    </div>
                 </div>
+                <!-- ***** Pricing Item End ***** -->
+
+          
+            @endforeach
             </div>
-        </div>
-    </div>
 </div>
+</section>
 @endsection

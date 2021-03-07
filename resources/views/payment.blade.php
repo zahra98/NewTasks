@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.new')
 
 @section('content')
+<section class="section colored">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -29,14 +30,16 @@
                             <div class="col-md-6">
                             <input id="amount" type="number" class="form-control @error('name') is-invalid @enderror" name="amount" value="{{ old('amount') }}" required autocomplete="name" autofocus>
                             </div>
-                            <button type="submit" class="btn btn-primary">
+                            <br>
+                         
+                            <button type="submit" class="main-button">
                                     {{ __('Charge My Account') }}
                                 </button>
 
                   @else
                   <form method = "GET" action="{{ route('activate.account') }}" >
                 @csrf
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="main-button">
                                     {{ __('Activate ') }}
                                 </button>
                 </form>
@@ -47,4 +50,5 @@
         </div>
     </div>
 </div>
+</section>
 @endsection

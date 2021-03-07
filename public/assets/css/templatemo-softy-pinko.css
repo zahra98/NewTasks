@@ -857,7 +857,8 @@ parallax & home seperator
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  background-image: url(../images/work-process-bg.png);
+  background-color: #f2f2fe;
+
   z-index: 2;
   top: -20%;
   left: -20%;
@@ -1169,6 +1170,10 @@ team
   color: #1e1e1e;
   letter-spacing: 0.25px;
   margin-bottom: 5px;
+  padding-left: 25px;
+  padding-right: 25px;
+  position: center;
+
 }
 
 .team-item .team-content .team-info span {
@@ -1292,10 +1297,10 @@ pricing
   text-align: center;
   margin-bottom: 12px;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 17px;
   color: #7a7a7a;
   letter-spacing: 0.25px;
-  text-decoration: line-through;
+ 
 }
 
 .pricing-item .pricing-body .list li.active {

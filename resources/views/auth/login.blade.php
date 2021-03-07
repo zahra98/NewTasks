@@ -1,7 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.new')
 
 
 @section('content')
+<section class="section colored">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -54,7 +55,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="main-button">
                                     {{ __('Login') }}
                                 </button>
 
@@ -71,4 +72,5 @@
         </div>
     </div>
 </div>
+</section>
 @endsection

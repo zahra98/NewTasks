@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.new')
 
 @section('content')
+<section class="section colored">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -15,4 +16,5 @@
         </div>
     </div>
 </div>
+</section>
 @endsection

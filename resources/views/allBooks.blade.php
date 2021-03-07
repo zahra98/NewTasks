@@ -1,62 +1,54 @@
-@extends('layouts.app')
+@extends('layouts.new')
 
 @section('content')
+<section class="section colored">
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-       
-            <div class="card">
-            
-                <div class="card-header">{{ __('Book Store') }}</div>
+            <!-- ***** Section Title Start ***** -->
 
-                <div class="card-body">
-                  <h> Books realated to : {{$books[0]->catagory}}</h>
-                  
-                  <br>
-                  <br>
-                  @foreach ($books as $book)
-                  <div  id="rcorners2">
-                    <h>This is book Number : {{ $book->id }}</h> 
+            <!-- ***** Section Title End ***** -->
+
+            <div class="row">
+                <!-- ***** Pricing Item Start ***** -->
+                @foreach ($books as $book)
+
+                <div class="col-lg-4 col-md-6 col-sm-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
+                    <div class="pricing-item active">
                     @if ($book->copies == 0)
                     &nbsp;
                     &nbsp;
-                    <h class = "war">Not Available</h>
+                    <div class="pricing-header">
+                            <h3 class="pricing-title">Not Available</h3>
+                        </div>
                     @endif
-                    <br>
-                    <br>
-                    
-                    <h>Title : {{ $book->title }}</h> <br>
-                    <h>Auther: {{ $book->auther }}</h> <br>
-                    <h>Price: {{ $book->price }}</h> <br>
-                    <h>ISPN : {{ $book->ispn }}</h><br>
-                    <h>Number of copies: {{ $book->copies }}</h> 
-                    <br>
-                    <br>
+
+                        <div class="pricing-body">
+                            <div class="price-wrapper">
+                                <span class="currency">$</span>
+                                <span class="price">{{ $book->price }}</span>
+                            </div>
+
+                            <ul class="list">
+                                <li class="active" >Title : {{ $book->title }}</li>
+                                <li class="active">Auther: {{ $book->auther }}</li>
+                                <li class="active">ISPN : {{ $book->ispn }}</li>
+                                <li class="active">Number of copies: {{ $book->copies }}</li>
+                             
 
 
-                    @if ($book->copies > 0)
-                    <?php
-                        echo "<a class= 'btn btn-primary' href='/bookdetails/?book=$book->id' > ";
-                        echo 'View Details';
-                        echo "</a>";
-                    ?>
-                    @endif
-                    
-                    <br>
-                    <br>
-                    <br>
-                
-                    <br>
+
+                            </ul>
+                        </div>
+                        <div class="pricing-footer">
+                            <a href="/bookdetails/?book={{ $book->id }}" class="main-button">More Details</a>
+                            
+                        </div>
                     </div>
-                    <br>
-                    <br>
-                 
-
-                  @endforeach
-               
                 </div>
+                <!-- ***** Pricing Item End ***** -->
+
+          
+            @endforeach
             </div>
-        </div>
-    </div>
-</div>
+  </div>
+</section>
 @endsection

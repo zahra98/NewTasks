@@ -1,33 +1,28 @@
-@extends('layouts.app')
+@extends('layouts.new')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Book Store') }}</div>
+<section class="mini">
+<div class="mini-content">
+            <div class="container">
 
-                <div class="card-body">
-                    
-                  <h> Choose a catagory:</h>
-                  <br>
-                  <br>
-                 
+                <!-- ***** Mini Box Start ***** -->
+                <div class="row">
+                @foreach ($books as $book)
 
-                    <?php
-                  //  echo count($books);
-                    for ($x = 0; $x < count($books); $x++) {
-                        $cat = $books[$x]->catagory;
-                        echo "<a href='/catagory/?cat=$cat' > ";
-                        echo $books[$x]->catagory;
-                        echo "</a>";
-                      echo "<br>";
-                      echo "<br>";
-                      } 
-                    ?>
+                    <div class="col-lg-2 col-md-3 col-sm-6 col-6">
+                        <a href="/catagory/?cat={{$book->catagory}}" class="mini-box">
+                            <i><img src="assets/images/work-process-item-01.png" alt=""></i>
+                            <strong>{{$book->catagory}}</strong>
+                            <span>Here you can find all the books related to {{$book->catagory}} </span>
+                         
+                        </a>
+
+                    </div>
+                 @endforeach
+
                 </div>
+                <!-- ***** Mini Box End ***** -->
             </div>
         </div>
-    </div>
-</div>
+</section >
 @endsection
