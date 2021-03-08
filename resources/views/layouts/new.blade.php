@@ -53,16 +53,21 @@
     </div>  
 
     <header class="header-area header-sticky">
+    <a class="main-button" href="{{ URL::previous() }}">Go Back</a>
         <div class="container">
+       
             <div class="row">
+     
                 <div class="col-12">
+                
                     <nav class="main-nav">
+                   
                         <!-- ***** Logo Start ***** -->
                         <a href="#" class="logo">
                             Library
                             
                         </a>
-
+                       
                         @guest
                         <ul class="nav">
                             <li><a  href="{{ route('login') }}">{{ __('Login') }}</a></li>
