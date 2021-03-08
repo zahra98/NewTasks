@@ -48,7 +48,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(array $data)//validating the registration fields
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
@@ -77,8 +77,7 @@ class RegisterController extends Controller
         ]
     );
        $user -> save();
-       $user->assignRole($role);
-     //  $user->paymentAccount();
+       $user->assignRole($role); //give the user a role
        return  $user;
         
     }
