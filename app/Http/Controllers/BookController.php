@@ -40,7 +40,8 @@ class BookController extends Controller
        return view('addBook');
         
     }
-    protected function showBook()
+
+    protected function showBook()//get all the catagories
     {
         $book = DB::table('books')
                 ->select('catagory')

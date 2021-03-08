@@ -54,7 +54,7 @@ class RentController extends Controller
    
     }
 
-    protected function confirmRent()
+    protected function confirmRent()//sending the confirmation Email
     {
        
         $user_id = request('user');
@@ -110,7 +110,7 @@ class RentController extends Controller
         return redirect('/showRequests');
     }
 
-    protected function declineRent()
+    protected function declineRent()//sending the decline Email for the user
     {
         $bookid = request('bookid');
         $user_id = request('user');

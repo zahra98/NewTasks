@@ -132,27 +132,14 @@
 
 
                         @endguest
-    <!-- ***** Header Area End ***** -->
-
-    <!-- ***** Welcome Area Start ***** -->
     <div class="welcome-area" >
 
-        <!-- ***** Header Text Start ***** -->
-      
- 
-        <!-- ***** Header Text End ***** -->
     </div>
-    <!-- ***** Welcome Area End ***** -->
 
-    <!-- ***** Features Small Start ***** -->
     <main>
     @yield('content')
 </main>
 
-
-    <!-- ***** Contact Us End ***** -->
-    
-    <!-- ***** Footer Start ***** -->
     <footer>
         <div class="container">
             <div class="row">
@@ -168,15 +155,11 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <p class="copyright">Copyright &copy; 2020 Softy Pinko Company - Design: TemplateMo</p>
+                    <p class="copyright">Copyright &copy; </p>
                 </div>
             </div>
         </div>
     </footer>
-    
-    <!-- jQuery -->
-
-    <!-- Bootstrap -->
 
 
   </body>

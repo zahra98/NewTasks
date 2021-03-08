@@ -41,6 +41,7 @@ class HomeController extends Controller
         
     }
 
+    
     public function show()
     {
         $post =User::all();
