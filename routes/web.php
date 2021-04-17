@@ -57,7 +57,7 @@ Route::get('/bookdetails', function () {
         ]);
 
     });
-
+//testing
 Route::get('/confirmRent', [App\Http\Controllers\RentController::class, 'confirmRent'])->name('confirm')->middleware(['auth' => 'verified']);
 Route::get('/declineRent', [App\Http\Controllers\RentController::class, 'declineRent'])->middleware(['auth' => 'verified']);
 
