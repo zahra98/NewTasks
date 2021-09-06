@@ -20,24 +20,24 @@
 
 
     <script src="assets/js/bootstrap.min.js"></script>
-
+   
     <!-- Plugins -->
-    <script src="assets/js/scrollreveal.min.js"></script>
-    <script src="assets/js/waypoints.min.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/imgfix.min.js"></script> 
+  
+    <script src="{{ asset('assets/js/scrollreveal.min.js')}}"></script>
+    <script src="{{ asset('assets/js/waypoints.min.js')}}"></script>
+    <script src="{{ asset('assets/js/jquery.counterup.min.js')}}"></script>
+    <script src="{{ asset('assets/js/imgfix.min.js')}}"></script>
 
     <!-- Global Init -->
-    <script src="assets/js/custom.js"></script>
-  
+   
+    <script src="{{ asset('assets/js/custom.js')}}"></script>
 
 
     <title>My Library</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-
-    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
-
-    <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/templatemo-softy-pinko.css') }}" rel="stylesheet">
+    
 
     </head>
     

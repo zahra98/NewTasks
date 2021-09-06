@@ -1,6 +1,7 @@
 @extends('layouts.new')
 
 @section('content')
+
 <section class="section colored">
 <div class="container">
             <!-- ***** Section Title Start ***** -->
