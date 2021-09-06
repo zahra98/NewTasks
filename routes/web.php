@@ -21,6 +21,9 @@ use App\Models\Requests;
 Route::get('/', function () {
     return view('WelcomePage');
 });
+Route::get('/dash', function () {
+    return view('dashboard');
+});
 Auth::routes( ['verify'=> true]);
 Route::get('/addBook', [App\Http\Controllers\BookController::class, 'index'])->name('page')->middleware('can:add_books,user');
 Route::post('/addBook',[App\Http\Controllers\BookController::class, 'addBook'])->name('addBook');
