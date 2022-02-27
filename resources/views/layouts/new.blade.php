@@ -39,6 +39,38 @@
     <link href="{{ asset('assets/css/templatemo-softy-pinko.css') }}" rel="stylesheet">
     
 
+
+<!DOCTYPE HTML>
+<html>
+<head>  
+<script>
+window.onload = function () {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	exportEnabled: true,
+	title:{
+		text: "Books Catagories"
+	},
+	subtitles: [{
+		text: "number of books in each catagory"
+	}],
+	data: [{
+		type: "pie",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 16,
+		indexLabel: "{label} - #percent%",
+		yValueFormatString: "#,##0",
+		dataPoints: <?php echo json_encode($dataPoints ?? '', JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+}
+</script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
     </head>
     
     <body>
